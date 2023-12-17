@@ -38,7 +38,7 @@
                 <div class="branding">
                     <h1 class="logo">
                         <span aria-hidden="true" class="icon_lightbulb_alt icon" style="color:#Ff4b36;"></span>
-                        <span class="text-highlight" style="color:#Ff4b36;">Reference</span><span class="text-bold" >CODE</span>
+                        <span class="text-highlight" style="color:#Ff4b36;">JESICA</span><span class="text-bold" > - WIKI</span>
                     </h1>
                 </div><!--//branding-->
                 <div class="tagline">
@@ -47,9 +47,10 @@
                 </div><!--//tagline-->
                 
 	             <div class="main-search-box pt-3 pb-4 d-inline-block">
-	                 <form class="form-inline search-form justify-content-center" action="" method="get">
+	                 <form class="form-inline search-form justify-content-center" action="list.html" method="get">
 	            
-			            <input type="text" placeholder="Enter search terms..." name="search" class="form-control search-input">
+			            <input type="text" name="category" class="form-control search-input" value="all" style="display: none;">
+			            <input type="text" placeholder="Enter search terms..." name="search" class="form-control search-input" required>
 			            
 			            <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
 			            
@@ -63,7 +64,7 @@
             <div class="container">
                 <h2 class="title">Best Practice</h2>
                 <div class="intro">
-                    <p>Let's participate in creating a reference book to make our work easier and create better code quality.</p>
+                    <p>Let's participate in creating a reference book to make our work easier and create better code quality</p>
                 </div><!--//intro-->
                 <div id="cards-wrapper" class="cards-wrapper row">
                     <div class="item item-red col-lg-4 col-6">
@@ -73,7 +74,7 @@
                             </div>
                             <h3 class="title">Devops</h3>
                             <p class="intro">Devops development documentation</p>
-                            <a class="link" href="#"><span></span></a>
+                            <a class="link" href="list.html?category=devops"><span></span></a>
                         </div>
                     </div>
                     <div class="item item-red col-lg-4 col-6">
@@ -83,7 +84,7 @@
                             </div>
                             <h3 class="title">Backend</h3>
                             <p class="intro">Django development documentation</p>
-                            <a class="link" href="#"><span></span></a>
+                            <a class="link" href="list.html?category=django"><span></span></a>
                         </div>
                     </div>
                     <div class="item item-red col-lg-4 col-6">
@@ -93,7 +94,7 @@
                             </div>
                             <h3 class="title">Frontend</h3>
                             <p class="intro">Nuxt development documentation</p>
-                            <a class="link" href="#"><span></span></a>
+                            <a class="link" href="list.html?category=nuxt"><span></span></a>
                         </div>
                     </div>
                     <div class="item item-red col-lg-4 col-6">
@@ -103,7 +104,7 @@
                             </div>
                             <h3 class="title">SAP</h3>
                             <p class="intro">Abap development documentation</p>
-                            <a class="link" href="#"><span></span></a>
+                            <a class="link" href="list.html?category=abap"><span></span></a>
                         </div>
                     </div>
                     <div class="item item-red col-lg-4 col-6">
@@ -123,7 +124,7 @@
                             </div>
                             <h3 class="title">Mobile</h3>
                             <p class="intro">Flutter development documentation</p>
-                            <a class="link" href="#"><span></span></a>
+                            <a class="link" href="list.html?category=flutter"><span></span></a>
                         </div>
                     </div>
                     <div class="item item-red col-lg-4 col-6">
@@ -133,7 +134,17 @@
                             </div>
                             <h3 class="title">Monolithic</h3>
                             <p class="intro">Powerapps development documentation</p>
-                            <a class="link" href="#"><span></span></a>
+                            <a class="link" href="list.html?category=powerapps"><span></span></a>
+                        </div>
+                    </div>
+                    <div class="item item-red col-lg-4 col-6">
+                        <div class="item-inner">
+                            <div class="icon-holder">
+                                <i class="icon fa fa-paper-plane"></i>
+                            </div>
+                            <h3 class="title">DBA</h3>
+                            <p class="intro">Dba development documentation</p>
+                            <a class="link" href="list.html?category=dba"><span></span></a>
                         </div>
                     </div>
                 </div><!--//cards-->
