@@ -105,7 +105,7 @@
                 success: function(result){
                     $.each(result['list'],function(key,value){
                         var newDiv = document.createElement('div');
-                        newDiv.innerHTML = '<a href="detail.html" class="link_list"><h4 class="question">'+value["title"]+'</h4></a> <div class="answer">'+value["description"]+'</div> <div class="meta text-small"><i class="far fa-paper-plane"></i> created by '+value["creator"]+'</div> <hr/>';
+                        newDiv.innerHTML = '<a href="detail.html?ids='+value["id"]+'" class="link_list"><h4 class="question">'+value["title"]+'</h4></a> <div class="answer">'+value["description"]+'</div> <div class="meta text-small"><i class="far fa-paper-plane"></i> created by '+value["creator"]+'</div> <hr/>';
                         newDiv.className = 'detail-wiki-'+key;
                         parentDiv.appendChild(newDiv);
                     });

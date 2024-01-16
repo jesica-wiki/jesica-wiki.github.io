@@ -21,10 +21,11 @@
 
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head> 
 
-<body class="landing-page">   
+<body class="landing-page" onload="checkCookie()">
 	
 	<!-- GITHUB BUTTON JS -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -33,6 +34,11 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=994736563909741&autoLogAppEvents=1"></script>
     
+    <div id="loading-process">
+        <div class="loading-overlay">
+            <div class="lds-ripple"><div></div><div></div></div>
+        </div>
+    </div>
     <div class="page-wrapper" style="background-color: #f9f9fb;">
         
         <!-- ******Header****** -->
@@ -52,11 +58,6 @@
                 </ol>
             </div>
         </header>
-        <div class="hide-div" id="loading-process">
-            <div class="loading-overlay">
-                <div class="lds-ripple"><div></div><div></div></div>
-            </div>
-        </div>
 
         <div class="doc-wrapper">
             <div class="container">
@@ -66,95 +67,12 @@
                 </div>
                 <div class="doc-body row">
                     <div class="doc-content col-md-9 col-12 order-1">
-                        <div class="content-inner">
-                            <section id="license" class="doc-section">
-                                <h2 class="section-title">Description</h2>
-                                <div class="section-block">
-                                    <div class="jumbotron text-left">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                            </section>
-                            <section id="credits" class="doc-section">
-                                <h2 class="section-title">Readme</h2>
-                                <div class="section-block">
-                                    <ul class="list list-unstyled">
-                                        <pre>
-<code class="language-markup" style="width: 100%;">
-&lt;Helper send_email.py&gt;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\{AuthController,DocsController};
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-Route::post('/v1/login', 
-[AuthController::class, 'login']
-)->name('api.login');
-
-Route::get('/v1/docs-list', 
-[DocsController::class, 'list']
-)->name('api.docs-list');
-
-Route::middleware('auth:api')->group(function () {
-    Route::post('/v1/docs-create', [DocsController::class, 'add'])->name('api.docs-create');
-    Route::post('/v1/docs-detail/{id}', [DocsController::class, 'detail'])->name('api.docs-detail');
-    Route::post('/v1/docs-update/{id}', [DocsController::class, 'update'])->name('api.docs-update');
-});
-
-
-view > detail.py
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\{AuthController,DocsController};
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-Route::post('/v1/login', 
-[AuthController::class, 'login']
-)->name('api.login');
-
-Route::get('/v1/docs-list', 
-[DocsController::class, 'list']
-)->name('api.docs-list');
-
-Route::middleware('auth:api')->group(function () {
-    Route::post('/v1/docs-create', [DocsController::class, 'add'])->name('api.docs-create');
-    Route::post('/v1/docs-detail/{id}', [DocsController::class, 'detail'])->name('api.docs-detail');
-    Route::post('/v1/docs-update/{id}', [DocsController::class, 'update'])->name('api.docs-update');
-});
-</code>
-                                        </pre>
-                                    </ul>
-                                </div>
-                            </section>
-                        </div>
+                        <div class="content-inner" id="parentDiv"></div>
                     </div>
                     <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
                         <div id="doc-nav" class="doc-nav">
                             <ul id="doc-menu" class="nav doc-menu flex-column sticky">
-	                            <li class="nav-item">
-                                    <a class="nav-link scrollto" href="#license">description</a>
-	                            </li>
-	                            <li class="nav-item">
-                                    <a class="nav-link scrollto" href="#credits">readme</a>
-	                            </li>
+	                            
                             </ul><!--//doc-menu-->
                         </div>
                     </div><!--//doc-sidebar-->
@@ -162,7 +80,6 @@ Route::middleware('auth:api')->group(function () {
             </div>
         </div>
     </div>
-    
     <!-- Main Javascript -->          
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/prism/prism.js"></script>      
@@ -170,6 +87,92 @@ Route::middleware('auth:api')->group(function () {
     <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
     <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>                                                          
     <script src="assets/js/main.js"></script>
+    <script>
+       $(document).ready(function() {
+           var ld = document.getElementById('loading-process');
+           ld.style.display = "block";
+
+           var queryParams = new URLSearchParams(window.location.search);
+           var ids = queryParams.get('ids');
+
+           if (ids == null || ids == '') {
+               window.location.href = 'index.html';
+           }
+           
+           
+           let token = getCookie("token");
+           var parentDiv = document.getElementById('parentDiv');
+           var parentDiv2 = document.getElementById('doc-menu');
+           $.ajax({
+                url:"http://127.0.0.1:8000/api/v1/docs-detail/"+ids,
+                type: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                dataType : 'json',
+                success: function(result){
+                   console.log(result);
+                   var newDiv = document.createElement('section');
+                   newDiv.innerHTML = '<h2 class="section-title">Description</h2><div class="section-block"><ul class="list list-unstyled">'+result["data"]["description"]+'</ul></div>';
+                   newDiv.className = 'doc-section';
+                   newDiv.id = 'description';
+                   parentDiv.appendChild(newDiv);
+                   
+                   var newDiv2 = document.createElement('li');
+                   newDiv2.innerHTML = '<a class="nav-link scrollto" href="#description">description</a>';
+                   newDiv2.className = 'nav-item';
+                   parentDiv2.appendChild(newDiv2);
+
+                   $.each(result['data']['readme'],function(key,value){
+                        var newDiv = document.createElement('section');
+                        newDiv.innerHTML = '<h2 class="section-title">'+value["name"]+'</h2><div class="section-block"><ul class="list list-unstyled"><pre><code class="language-markup" style="width: 100%;" id="not_doc'+key+'"></code></pre></ul></div>';
+                        newDiv.className = "doc-section";
+                        newDiv.id = 'note'+key;
+                        parentDiv.appendChild(newDiv);
+                    
+                        var parentDiv1 = document.getElementById('not_doc'+key);
+                        var newDiv1 = document.createElement('span');
+                        newDiv1.innerText = value["note"];
+                        parentDiv1.appendChild(newDiv1);
+
+                        var newDiv2 = document.createElement('li');
+                        newDiv2.innerHTML = '<a class="nav-link scrollto" href="#note'+key+'">'+value["name"]+'</a>';
+                        newDiv2.className = 'nav-item';
+                        parentDiv2.appendChild(newDiv2);
+                   });
+                }
+           });
+           ld.style.display = "none";
+       });
+       
+       function getCookie(cname) {
+           let name = cname + "=";
+           let decodedCookie = decodeURIComponent(document.cookie);
+           let ca = decodedCookie.split(';');
+           for(let i = 0; i < ca.length; i++) {
+               let c = ca[i];
+               while (c.charAt(0) == ' ') {
+               c = c.substring(1);
+               }
+               if (c.indexOf(name) == 0) {
+               return c.substring(name.length, c.length);
+               }
+           }
+           return "";
+       }
+
+       function checkCookie() {
+           var ld = document.getElementById('loading-process');
+           ld.style.display = "block";
+           let user = getCookie("token");      
+           var lb = document.getElementById('login-buttons');
+           var cb = document.getElementById('create-buttons');
+           if (user == "") {
+               window.location.href = 'login.html';
+           }
+           ld.style.display = "none";
+       }
+    </script>
     
 </body>
 </html> 

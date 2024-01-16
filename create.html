@@ -190,7 +190,7 @@
                 var cells = rows[i].cells;
                 var rowData = {
                     name: cells[0].textContent,
-                    note: cells[1].textContent
+                    note: cells[1].textContent.replace(/\n/g, '&#10;')
                 };
                 extractedData.push(rowData);
             }
