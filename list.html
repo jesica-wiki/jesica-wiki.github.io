@@ -31,10 +31,16 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=994736563909741&autoLogAppEvents=1"></script>
     
-    <div class="page-wrapper">
+
+    <div id="loading-process">
+        <div class="loading-overlay">
+            <div class="lds-ripple"><div></div><div></div></div>
+        </div>
+    </div>
+    <div class="page-wrapper" style="background-color: #f9f9fb;">
         
         <!-- ******Header****** -->
-        <header id="header" class="header">
+        <header id="header" class="header" style="background-image: url('assets/images/header.png');background-size: cover;">
             <div class="container">
                 <div class="branding">
                     <h1 class="logo">
@@ -49,22 +55,17 @@
                     <li class="breadcrumb-item active">Reference &amp; Code</li>
                 </ol>
                 <div class="top-search-box">
-                    <a class="btn btn-cta" href="login.html" style="background:#Ff4b36;"><i class="fas fa-external-link-alt"></i> Login</a>
+                    <div id="login-buttons"></div>
+                    <div id="create-buttons"></div>
                 </div>
             </div>
         </header>
         
         <section class="cards-section">
 
-            <div class="hide-div" id="loading-process">
-                <div class="loading-overlay">
-                    <div class="lds-ripple"><div></div><div></div></div>
-                </div>
-            </div>
-
             <div class="container">
                 <div class="d-inline-block" style="width: 100%;margin-bottom: 3%;">
-                   <form class="form-inline search-form justify-content-center" action="list.html" method="get" id="login-process">
+                   <form class="form-inline search-form justify-content-center" action="list.html" method="get">
                       <input type="text" name="category" class="form-control search-input" value="all" style="display: none;">
                       <input type="text" placeholder="Enter search terms..." name="search" class="form-control search-input" required>
                       <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
@@ -84,12 +85,12 @@
     <script src="assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
+            var ld = document.getElementById('loading-process');
+            ld.style.display = "block";
             var queryParams = new URLSearchParams(window.location.search);
             var search = queryParams.get('search');
             var category = queryParams.get('category');
-            var ld = document.getElementById('loading-process');
             var parentDiv = document.getElementById('parentDiv');
-            ld.style.display = "block";
             if (search == null) {
                 search = '';
             }
@@ -104,7 +105,7 @@
                 success: function(result){
                     $.each(result['list'],function(key,value){
                         var newDiv = document.createElement('div');
-                        newDiv.innerHTML = '<a href="#" class="link_list"><h4 class="question">'+value["title"]+'</h4></a> <div class="answer">'+value["description"]+'</div> <div class="meta text-small"><i class="far fa-paper-plane"></i> created by '+value["creator"]+'</div> <hr/>';
+                        newDiv.innerHTML = '<a href="detail.html" class="link_list"><h4 class="question">'+value["title"]+'</h4></a> <div class="answer">'+value["description"]+'</div> <div class="meta text-small"><i class="far fa-paper-plane"></i> created by '+value["creator"]+'</div> <hr/>';
                         newDiv.className = 'detail-wiki-'+key;
                         parentDiv.appendChild(newDiv);
                     });
@@ -130,13 +131,17 @@
         }
 
         function checkCookie() {
+            var ld = document.getElementById('loading-process');
+            ld.style.display = "block";
             let user = getCookie("token");      
-            var lg = document.getElementById('login-process');
+            var lb = document.getElementById('login-buttons');
+            var cb = document.getElementById('create-buttons');
             if (user != "") {
-                lg.style.display = "none";
+                cb.innerHTML = '<a class="btn btn-cta" href="create.html" style="background:#Ff4b36;"><i class="fas fa-pencil"></i> Create Doc</a>';
             } else {
-                lg.style.display = "block";
+                lb.innerHTML = '<a class="btn btn-cta" href="login.html" style="background:#Ff4b36;"><i class="fas fa-external-link-alt"></i> Login</a>';
             }
+            ld.style.display = "none";
         }
     </script>
 </body>

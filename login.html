@@ -31,10 +31,10 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=994736563909741&autoLogAppEvents=1"></script>
     
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="background-color: #f9f9fb;">
         
         <!-- ******Header****** -->
-        <header id="header" class="header">
+        <header id="header" class="header" style="background-image: url('assets/images/header.png');background-size: cover;">
             <div class="container">
                 <div class="branding">
                     <h1 class="logo">
@@ -91,18 +91,20 @@
             if (email == '' || password == '') {
                 alert('Please fill all the fields');
             } else {
+                var ld = document.getElementById('loading-process');
+                ld.style.display = "block";
                 $.ajax({
                     url: 'http://127.0.0.1:8000/api/v1/login',
                     type: 'POST',
-                    data: {
+                    data: { 
                         email: email,
                         password: password
                     },
                     success: function (data) {
                         console.log(data);
                         if (data.message == 'success') {
-                            window.location.href = 'index.html';
                             setCookie("token", data.token, 300);
+                            window.location.href = 'index.html';
                         } else {
                             alert(data.message);
                         }
@@ -112,6 +114,7 @@
                         alert('Something went wrong');
                     }
                 });
+                ld.style.display = "none";
             }
         }
         function setCookie(cname,cvalue,exdays) {

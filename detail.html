@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Detail | Docs Reference Code</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="assets/fontawesome/js/all.js"></script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">  
+    <link rel="stylesheet" href="assets/plugins/simplelightbox/simple-lightbox.min.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+
+</head> 
+
+<body class="landing-page">   
+	
+	<!-- GITHUB BUTTON JS -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+     
+    <!--FACEBOOK LIKE BUTTON JAVASCRIPT SDK-->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=994736563909741&autoLogAppEvents=1"></script>
+    
+    <div class="page-wrapper" style="background-color: #f9f9fb;">
+        
+        <!-- ******Header****** -->
+        <header id="header" class="header"  style="background-image: url('assets/images/header.png');background-size: cover;">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_lightbulb_alt icon" style="color:#Ff4b36;"></span>
+                            <span class="text-highlight" style="color:#Ff4b36;">JESICA</span><span class="text-bold" > - WIKI</span>
+                        </a>
+                    </h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Reference &amp; Code</li>
+                </ol>
+            </div>
+        </header>
+        <div class="hide-div" id="loading-process">
+            <div class="loading-overlay">
+                <div class="lds-ripple"><div></div><div></div></div>
+            </div>
+        </div>
+
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> License &amp; Credits</h1>
+                    <div class="meta"><i class="far fa-clock"></i> Creator muhammadbahtiars</div>
+                </div>
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <section id="license" class="doc-section">
+                                <h2 class="section-title">Description</h2>
+                                <div class="section-block">
+                                    <div class="jumbotron text-left">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </div>
+                                </div>
+                            </section>
+                            <section id="credits" class="doc-section">
+                                <h2 class="section-title">Readme</h2>
+                                <div class="section-block">
+                                    <ul class="list list-unstyled">
+                                        <pre>
+<code class="language-markup" style="width: 100%;">
+&lt;Helper send_email.py&gt;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\{AuthController,DocsController};
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+Route::post('/v1/login', 
+[AuthController::class, 'login']
+)->name('api.login');
+
+Route::get('/v1/docs-list', 
+[DocsController::class, 'list']
+)->name('api.docs-list');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/v1/docs-create', [DocsController::class, 'add'])->name('api.docs-create');
+    Route::post('/v1/docs-detail/{id}', [DocsController::class, 'detail'])->name('api.docs-detail');
+    Route::post('/v1/docs-update/{id}', [DocsController::class, 'update'])->name('api.docs-update');
+});
+
+
+view > detail.py
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\{AuthController,DocsController};
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+Route::post('/v1/login', 
+[AuthController::class, 'login']
+)->name('api.login');
+
+Route::get('/v1/docs-list', 
+[DocsController::class, 'list']
+)->name('api.docs-list');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/v1/docs-create', [DocsController::class, 'add'])->name('api.docs-create');
+    Route::post('/v1/docs-detail/{id}', [DocsController::class, 'detail'])->name('api.docs-detail');
+    Route::post('/v1/docs-update/{id}', [DocsController::class, 'update'])->name('api.docs-update');
+});
+</code>
+                                        </pre>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+                            <ul id="doc-menu" class="nav doc-menu flex-column sticky">
+	                            <li class="nav-item">
+                                    <a class="nav-link scrollto" href="#license">description</a>
+	                            </li>
+	                            <li class="nav-item">
+                                    <a class="nav-link scrollto" href="#credits">readme</a>
+	                            </li>
+                            </ul><!--//doc-menu-->
+                        </div>
+                    </div><!--//doc-sidebar-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Javascript -->          
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/prism/prism.js"></script>      
+    <script src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>      
+    <script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+    <script src="assets/plugins/simplelightbox/simple-lightbox.min.js"></script>                                                          
+    <script src="assets/js/main.js"></script>
+    
+</body>
+</html> 
+
