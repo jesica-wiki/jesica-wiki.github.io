@@ -80,7 +80,20 @@
             </div>
         </div>
     </div>
-    <!-- Main Javascript -->          
+    <!-- Main Javascript -->  
+    <!-- Main Javascript -->   
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/60085afea9a34e36b96e804e/1esga6sk0';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>        
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/plugins/prism/prism.js"></script>      
     <script src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>      
@@ -104,7 +117,7 @@
            var parentDiv = document.getElementById('parentDiv');
            var parentDiv2 = document.getElementById('doc-menu');
            $.ajax({
-                url:"http://127.0.0.1:8000/api/v1/docs-detail/"+ids,
+                url:"https://wiki.yogyakartadigital.com/api/v1/docs-detail/"+ids,
                 type: "GET",
                 headers: {
                     "Authorization": "Bearer " + token
