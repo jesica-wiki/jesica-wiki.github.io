@@ -131,6 +131,7 @@
                 success: function(result){
                    var cb = document.getElementById('create-buttons');
                    let user = getCookie("username"); 
+                   console.log(user);
                    if (user == result['data']['creator']) {
                         cb.innerHTML = '<a class="btn btn-cta" href="update.html?ids='+result['data']['id']+'" style="background:#Ff4b36;"><i class="fas fa-pencil"></i> Update Doc</a>';
                     }

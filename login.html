@@ -103,7 +103,7 @@
                     success: function (data) {
                         if (data.message == 'success') {
                             setCookie("token", data.token, 300);
-                            setCookie("username", data.username, 300);
+                            setCookie("username", data.user.username, 300);
                             window.location.href = 'index.html';
                         } else {
                             alert(data.message);
