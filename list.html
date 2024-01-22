@@ -146,14 +146,15 @@
         }
 
         function checkCookie() {
-            var search = queryParams.get('search');
+            var queryParams = new URLSearchParams(window.location.search);
+            var category = queryParams.get('category');
             var ld = document.getElementById('loading-process');
             ld.style.display = "block";
             let user = getCookie("token");      
             var lb = document.getElementById('login-buttons');
             var cb = document.getElementById('create-buttons');
             if (user != "") {
-                cb.innerHTML = '<a class="btn btn-cta" href="create.html?category='+search+'" style="background:#Ff4b36;"><i class="fas fa-pencil"></i> Create Doc</a>';
+                cb.innerHTML = '<a class="btn btn-cta" href="create.html?category='+category+'" style="background:#Ff4b36;"><i class="fas fa-pencil"></i> Create Doc</a>';
             } else {
                 lb.innerHTML = '<a class="btn btn-cta" href="login.html" style="background:#Ff4b36;"><i class="fas fa-external-link-alt"></i> Login</a>';
             }
