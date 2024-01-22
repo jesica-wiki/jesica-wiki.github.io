@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Create | Docs Reference Code</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="assets/fontawesome/js/all.js"></script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">    
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head> 
+
+<body class="landing-page" onload="checkCookie()">
+	
+	<!-- GITHUB BUTTON JS -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+     
+    <!--FACEBOOK LIKE BUTTON JAVASCRIPT SDK-->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=994736563909741&autoLogAppEvents=1"></script>
+    
+
+    <div id="loading-process">
+        <div class="loading-overlay">
+            <div class="lds-ripple"><div></div><div></div></div>
+        </div>
+    </div>
+    <div class="page-wrapper" style="background-color: #f9f9fb;">
+        
+        <!-- ******Header****** -->
+        <header id="header" class="header" style="background-image: url('assets/images/header.png');background-size: cover;">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_lightbulb_alt icon" style="color:#Ff4b36;"></span>
+                            <span class="text-highlight" style="color:#Ff4b36;">JESICA</span><span class="text-bold" > - WIKI</span>
+                        </a>
+                    </h1>
+                </div>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active">Reference &amp; Code</li>
+                </ol>
+            </div>
+        </header>
+        
+        <section class="cards-section">
+
+            <div class="hide-div" id="loading-process">
+                <div class="loading-overlay">
+                    <div class="lds-ripple"><div></div><div></div></div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="d-inline-block" style="width: 100%;margin-bottom: 3%;">
+                    <form class="form-inline search-form justify-content-center" action="#" method="post">
+                        <h4 class="title">Title</h4>
+                        <input type="text" placeholder="Enter Ttitle ..." name="titles" class="form-control" required>
+                        <hr/>
+                        <h4 class="title">Description</h4>
+                            <textarea class="form-control" rows="3" placeholder="Description ..." name="descriptions"></textarea>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-sm-11"></div>
+                            <div class="col-sm-1">
+                                <button type="button" class="btn text-center" style="background:#Ff4b36;color: #fff;" onclick="add_doc()"><i class="fas fa-plus"></i> Add</button>
+                                <br/>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Name ..." id="names" class="form-control">
+                            </div>
+                            <div class="col-sm-12">
+                                <br/>
+                                <textarea class="form-control" rows="10" placeholder="Note ..." id="notes"></textarea>
+                            </div>
+                        </div>
+                        <br/>
+                        <hr/>
+                        <table class="table table-striped" id="doc-list-table">
+                            <thead>
+                              <tr>
+                                <th width="30%">Name</th>
+                                <th width="65%">Note</th>
+                                <th width="5%">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <hr/>
+                        <br/><br/>
+                        <button type="button" onclick="submit_button()" class="btn btn-cta" style="background:#Ff4b36;color: #fff;">
+                            <i class="fas fa-save"></i> Submit
+                        </button>
+                    </form>
+               </div>
+                <div class="row">
+                    <div class="col-sm-12" id="parentDiv"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+     
+    <!-- Main Javascript -->       
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>     
+    <script src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>     
+    <script>
+        function add_doc() {
+            var nameInput = document.getElementById("names");
+            var noteInput = document.getElementById("notes");
+            var nameValue = nameInput.value;
+            var noteValue = noteInput.value;
+            if(nameValue == '' || noteValue == '') {
+                alert('Please fill all the fields');
+            } else {
+                var table = document.getElementById("doc-list-table");
+                var tbody = table.getElementsByTagName('tbody')[0];
+
+                var row = tbody.insertRow();
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                cell1.innerText = nameValue;
+                cell2.innerText = noteValue;
+                cell3.innerHTML = '<button type="button" class="btn text-center" style="color: #Ff4b36;" onclick="delete_row(this)"><i class="fas fa-trash"></i></button>';
+                nameInput.value = '';
+                noteInput.value = '';
+            }
+        }
+
+        function delete_row(button) {
+            var rowIndex = button.parentNode.parentNode.rowIndex;
+            var table = document.getElementById("doc-list-table");
+            table.deleteRow(rowIndex);
+        
+        }
+        
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            var ld = document.getElementById('loading-process');
+            ld.style.display = "block";
+            let user = getCookie("token");      
+            var lb = document.getElementById('login-buttons');
+            var cb = document.getElementById('create-buttons');
+            if (user == "") {
+                window.location.href = 'login.html';
+            }
+            ld.style.display = "none";
+        }
+
+        function submit_button() {
+            var title = $("input[name='titles']").val();
+            var descriptions = $("textarea[name='descriptions']").val();
+            var queryParams = new URLSearchParams(window.location.search);
+            var categorys = queryParams.get('category');
+
+            var table = document.getElementById("doc-list-table");
+            var rows = table.getElementsByTagName('tbody')[0].rows;
+            var extractedData = [];
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].cells;
+                var rowData = {
+                    name: cells[0].textContent,
+                    note: cells[1].textContent.replace(/\n/g, '&#10;')
+                };
+                extractedData.push(rowData);
+            }
+            let token = getCookie("token"); 
+            if (title == '' || descriptions == '' || extractedData.length == 0) {
+                alert('Please fill all the fields');
+            } else {
+                $.ajax({
+                    url: 'https://wiki.yogyakartadigital.com/api/v1/docs-create',
+                    type: 'POST',
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    },
+                    data: { 
+                        title:title,
+                        description:descriptions,
+                        category:categorys,
+                        readme:extractedData
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.message == 'success') {
+                            window.location.href = 'detail.html';
+                        } else {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
+                        alert('Something went wrong');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html> 
+

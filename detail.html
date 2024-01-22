@@ -56,14 +56,17 @@
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item active">Reference &amp; Code</li>
                 </ol>
+                <div class="top-search-box">
+                    <div id="create-buttons"></div>
+                </div>
             </div>
         </header>
 
         <div class="doc-wrapper">
             <div class="container">
                 <div id="doc-header" class="doc-header text-center">
-                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> License &amp; Credits</h1>
-                    <div class="meta"><i class="far fa-clock"></i> Creator muhammadbahtiars</div>
+                    <h1 class="doc-title" id="doc_title"></h1>
+                    <div class="meta doc-meta"></div>
                 </div>
                 <div class="doc-body row">
                     <div class="doc-content col-md-9 col-12 order-1">
@@ -116,6 +119,8 @@
            let token = getCookie("token");
            var parentDiv = document.getElementById('parentDiv');
            var parentDiv2 = document.getElementById('doc-menu');
+           var parentDivTitle = document.getElementById('doc-title');
+           var parentDivMeta = document.getElementById('doc-meta');
            $.ajax({
                 url:"https://wiki.yogyakartadigital.com/api/v1/docs-detail/"+ids,
                 type: "GET",
@@ -124,7 +129,23 @@
                 },
                 dataType : 'json',
                 success: function(result){
-                   console.log(result);
+                   var cb = document.getElementById('create-buttons');
+                   let user = getCookie("username"); 
+                   if (user == result['data']['creator']) {
+                        cb.innerHTML = '<a class="btn btn-cta" href="update.html?ids='+result['data']['id']+'" style="background:#Ff4b36;"><i class="fas fa-pencil"></i> Update Doc</a>';
+                    }
+                
+                   var newDivtitle = document.createElement('i');
+                   newDivtitle.innerHTML = '<i class="icon fa fa-paper-plane"></i>'+result['data']['title'];
+                   newDivtitle.className = 'doc-title';
+                   parentDivTitle.appendChild(newDivtitle);
+
+                   
+                   var newDivMeta = document.createElement('span');
+                   newDivMeta.innerHTML = '<span> Creator '+result['data']['creator']+'</span>';
+                   newDivMeta.className = 'doc-meta';
+                   parentDivMeta.appendChild(newDivMeta);
+
                    var newDiv = document.createElement('section');
                    newDiv.innerHTML = '<h2 class="section-title">Description</h2><div class="section-block"><ul class="list list-unstyled">'+result["data"]["description"]+'</ul></div>';
                    newDiv.className = 'doc-section';
