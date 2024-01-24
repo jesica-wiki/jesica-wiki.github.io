@@ -194,7 +194,6 @@
                 };
                 extractedData.push(rowData);
             }
-            console.log(extractedData);
             let token = getCookie("token"); 
             if (title == '' || descriptions == '' || extractedData.length == 0) {
                 alert('Please fill all the fields');
@@ -207,7 +206,7 @@
                     },
                     data: { 
                         title:title,
-                        description:descriptions,
+                        description:descriptions.replace(/\n/g, '<br>'),
                         category:categorys,
                         readme:extractedData
                     },
