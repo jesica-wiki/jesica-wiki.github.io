@@ -190,10 +190,11 @@
                 var cells = rows[i].cells;
                 var rowData = {
                     name: cells[0].textContent,
-                    note: cells[1].textContent.replace(/\n/g, '&#10;')
+                    note: cells[1].innerHTML
                 };
                 extractedData.push(rowData);
             }
+            console.log(extractedData);
             let token = getCookie("token"); 
             if (title == '' || descriptions == '' || extractedData.length == 0) {
                 alert('Please fill all the fields');

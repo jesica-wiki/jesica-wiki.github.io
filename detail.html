@@ -137,12 +137,12 @@
                     }
                 
                    var newDivtitle = document.createElement('i');
-                   newDivtitle.innerHTML = '<i class="icon fa fa-paper-plane"></i>'+result['data']['title'];
+                   newDivtitle.innerHTML = result['data']['title'];
                    parentDivTitle.appendChild(newDivtitle);
 
                    
                    var newDivMeta = document.createElement('span');
-                   newDivMeta.innerHTML = '<span> Creator '+result['data']['creator']+'</span>';
+                   newDivMeta.innerHTML = '<small><i class="fa fa-arrow"></i> Creator '+result['data']['creator']+'</small>';
                    parentDivMeta.appendChild(newDivMeta);
 
                    var newDiv = document.createElement('section');
@@ -158,14 +158,14 @@
 
                    $.each(result['data']['readme'],function(key,value){
                         var newDiv = document.createElement('section');
-                        newDiv.innerHTML = '<h2 class="section-title">'+value["name"]+'</h2><div class="section-block"><ul class="list list-unstyled"><pre><code class="language-markup" style="width: 100%;" id="not_doc'+key+'"></code></pre></ul></div>';
+                        newDiv.innerHTML = '<h2 class="section-title">'+value["name"]+'</h2><div class="section-block"><ul class="list list-unstyled"><pre><code class="language-markup" id="not_doc'+key+'"></code></pre></ul></div>';
                         newDiv.className = "doc-section";
                         newDiv.id = 'note'+key;
                         parentDiv.appendChild(newDiv);
                     
                         var parentDiv1 = document.getElementById('not_doc'+key);
                         var newDiv1 = document.createElement('span');
-                        newDiv1.innerText = value["note"];
+                        newDiv1.innerHTML = value["note"];
                         parentDiv1.appendChild(newDiv1);
 
                         var newDiv2 = document.createElement('li');
