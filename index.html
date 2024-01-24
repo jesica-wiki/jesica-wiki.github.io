@@ -21,7 +21,7 @@
 
 </head> 
 
-<body class="landing-page" style="background-color: #f9f9fb;">   
+<body class="landing-page" style="background-color: #f9f9fb;" onload="checkCookie()">   
 	
 	<!-- GITHUB BUTTON JS -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -34,6 +34,10 @@
         
         <!-- ******Header****** -->
         <header class="header text-center" style="background-image: url('assets/images/header.png');background-size: cover;">
+            <div style="margin-top: 0%; float: right;padding-right: 5%; display: none;" id="button-profile">
+                <a href="profile.html"><i class="fa fa-user-circle fa-3x"></i></a>
+                <br/><br/><br/>
+            </div>
             <div class="container">
                 <div class="branding">
                     <h1 class="logo">
@@ -193,8 +197,8 @@
     <!--End of Tawk.to Script-->    
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>     
     <script src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>                                                                
-    <script src="assets/js/main.js"></script>
-    
+    <script src="assets/js/main.js"></script>                                                               
+    <script src="assets/js/index.js"></script>
 </body>
 </html> 
 
