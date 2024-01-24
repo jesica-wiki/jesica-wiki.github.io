@@ -158,7 +158,7 @@
 
                    $.each(result['data']['readme'],function(key,value){
                         var newDiv = document.createElement('section');
-                        newDiv.innerHTML = '<h2 class="section-title">'+value["name"]+'</h2><div class="section-block"><ul class="list list-unstyled"><pre><code class="language-markup" style="min-width:100%;" id="not_doc'+key+'"></code></pre></ul></div>';
+                        newDiv.innerHTML = '<h2 class="section-title">'+value["name"]+' <a href="#"><i class="fa fa-copy"></i></a></h2><div class="section-block"><ul class="list list-unstyled"><pre><code class="language-markup" style="min-width:100%;" id="not_doc'+key+'"></code></pre></ul></div>';
                         newDiv.className = "doc-section";
                         newDiv.id = 'note'+key;
                         parentDiv.appendChild(newDiv);
