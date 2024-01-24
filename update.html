@@ -137,7 +137,7 @@
                     var inputTitle = document.getElementById('titles');
                     var inputDesription = document.getElementById('descriptions');
                     inputTitle.value = result['data']['title'];
-                    inputDesription.value = result["data"]["description"];
+                    inputDesription.value = result["data"]["description"].replace('<br>', "\n");
                     $.each(result['data']['readme'],function(key,value){
                         var table = document.getElementById("doc-list-table");
                         var tbody = table.getElementsByTagName('tbody')[0];
