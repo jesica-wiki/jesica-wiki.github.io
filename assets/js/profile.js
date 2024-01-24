@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+
     let token = getCookie("token");
      var fullnameInput = document.getElementById("fullname");
      var usernameInput = document.getElementById("username");
@@ -27,7 +28,7 @@ $(document).ready(function() {
      var confirm_password = $("input[name='confirm_password']").val();
 
      if (fullname == '') {
-         alert('Please fill the fullname');
+        swal("Oops!", 'Please fill the fullname', "warning");
      } else {
          let token = getCookie("token");
          $.ajax({
@@ -45,7 +46,7 @@ $(document).ready(function() {
                  if (data.message == 'success') {
                      window.location.href = 'index.html';
                  } else {
-                     alert(data.message);
+                    swal("Failed!", data.message, "error");
                  }
              },
              error: function (data) {
@@ -77,3 +78,23 @@ $(document).ready(function() {
      }
      return "";
  }
+
+ function checkCookie() {
+     var ld = document.getElementById('loading-process');
+     ld.style.display = "block";
+     let user = getCookie("token");      
+     var lb = document.getElementById('login-buttons');
+     var cb = document.getElementById('create-buttons');
+     if (user == "") {
+         window.location.href = 'login.html';
+     }
+     ld.style.display = "none";
+ }
+
+function clearCookie() {
+    var token = 'token';
+    var username = 'username';
+    document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = username + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = 'index.html';
+}

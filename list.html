@@ -62,17 +62,35 @@
         </header>
         
         <section class="cards-section">
-
+            <form action="list.html" method="get">
             <div class="container">
-                <div class="d-inline-block" style="width: 100%;margin-bottom: 3%;">
-                   <form class="form-inline search-form justify-content-center" action="list.html" method="get">
-                      <input type="text" name="category" class="form-control search-input" value="all" id="search_cat" style="display: none;">
-                      <input type="text" placeholder="Enter search terms..." name="search" id="searchs" class="form-control search-input">
-                      <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
-                  </form>
-               </div>
                 <div class="row">
-                    <div class="col-sm-12" id="parentDivTag"></div>
+                    <div class="col-sm-3">
+                        <select class="form-select search-input" name="category" id="search_cat">
+                            <option value="all">All</option>
+                            <option value="devops">Devops</option>
+                            <option value="django">Django</option>
+                            <option value="nuxt">Nuxt</option>
+                            <option value="abap">Abap</option>
+                            <option value="java">Java</option>
+                            <option value="flutter">Flutter</option>
+                            <option value="powerapps">Powerapps</option>
+                            <option value="dba">DBA</option>
+                            <option value="react">React</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-inline search-form justify-content-center">
+                            <div class="d-inline-block" style="width: 100%;margin-bottom: 3%;">
+                                <input type="text" placeholder="Enter search terms..." name="search" id="searchs" class="form-control">
+                                <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <div class="row">
+                    <div class="col-sm-12" id="parentDivTag"></div><br/>
                     <div class="col-sm-12" id="parentDiv"></div>
                 </div>
             </div>
@@ -96,79 +114,8 @@
     </script>   
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>     
     <script src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>                                                                
-    <script src="assets/js/main.js"></script>
-    <script>
-        $(document).ready(function() {
-            var inputSearch = document.getElementById('searchs');
-            var ld = document.getElementById('loading-process');
-            ld.style.display = "block";
-            var queryParams = new URLSearchParams(window.location.search);
-            var search = queryParams.get('search');
-            inputSearch.value = search;
-            var category = queryParams.get('category');
-            var parentDiv = document.getElementById('parentDiv');
-            document.getElementById("search_cat").value = category;
-
-            var parentDiv2 = document.getElementById('parentDivTag');
-            var newDiv2 = document.createElement('div');
-            newDiv2.innerHTML = '<small style="color: grey;" class=""><i class="fa fa-sort-alpha-asc"></i> '+category.toUpperCase()+'</small>';
-            parentDiv2.appendChild(newDiv2);
-            
-            if (search == null) {
-                search = '';
-            }
-            if (category == null) {
-                category = 'all';
-            }
-            console.log(search);
-            $.ajax({
-                url:"https://wiki.yogyakartadigital.com/api/v1/docs-list?category="+category+"&search="+search,
-                type: "GET",
-                dataType : 'json',
-                success: function(result){
-                    $.each(result['list'],function(key,value){
-                        var newDiv = document.createElement('div');
-                        newDiv.innerHTML = '<a href="detail.html?ids='+value["id"]+'" class="link_list"><h4 class="question">'+value["title"]+'</h4></a> <div class="answer">'+value["description"]+'</div> <div class="meta text-small">created by '+value["creator"]+'</div> <hr/>';
-                        newDiv.className = 'detail-wiki-'+key;
-                        parentDiv.appendChild(newDiv);
-                    });
-                }
-            });
-            ld.style.display = "none";
-        });
-        
-        function getCookie(cname) {
-            let name = cname + "=";
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
-
-        function checkCookie() {
-            var queryParams = new URLSearchParams(window.location.search);
-            var category = queryParams.get('category');
-            var ld = document.getElementById('loading-process');
-            ld.style.display = "block";
-            let user = getCookie("token");      
-            var lb = document.getElementById('login-buttons');
-            var cb = document.getElementById('create-buttons');
-            if (user != "") {
-                cb.innerHTML = '<a class="btn btn-cta" href="create.html?category='+category+'" style="background:#Ff4b36;"><i class="fas fa-pencil"></i> Create Doc</a>';
-            } else {
-                lb.innerHTML = '<a class="btn btn-cta" href="login.html" style="background:#Ff4b36;"><i class="fas fa-external-link-alt"></i> Login</a>';
-            }
-            ld.style.display = "none";
-        }
-    </script>
+    <script src="assets/js/main.js"></script>                                                           
+    <script src="assets/js/list.js"></script>
 </body>
 </html> 
 

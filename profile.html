@@ -18,11 +18,12 @@
     <link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">    
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>                                                 
+    <script src="assets/js/sweetalert.min.js"></script>
 
 </head> 
 
-<body class="landing-page">   
+<body class="landing-page" onload="checkCookie()">   
 	
 	<!-- GITHUB BUTTON JS -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -48,6 +49,11 @@
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item active">Reference &amp; Code</li>
                 </ol>
+                <div class="top-search-box">
+                    <div id="create-buttons">
+                        <a class="btn btn-cta" href="#" style="background:#Ff4b36;" onclick="clearCookie()"><i class="fas fa-logout"></i> Logout</a>
+                    </div>
+                </div>
             </div>
         </header>
         
