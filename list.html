@@ -67,11 +67,12 @@
                 <div class="d-inline-block" style="width: 100%;margin-bottom: 3%;">
                    <form class="form-inline search-form justify-content-center" action="list.html" method="get">
                       <input type="text" name="category" class="form-control search-input" value="all" id="search_cat" style="display: none;">
-                      <input type="text" placeholder="Enter search terms..." name="search" class="form-control search-input" required>
+                      <input type="text" placeholder="Enter search terms..." name="search" class="form-control search-input">
                       <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
                   </form>
                </div>
                 <div class="row">
+                    <div class="col-sm-12" id="parentDivTag"></div>
                     <div class="col-sm-12" id="parentDiv"></div>
                 </div>
             </div>
@@ -104,7 +105,12 @@
             var search = queryParams.get('search');
             var category = queryParams.get('category');
             var parentDiv = document.getElementById('parentDiv');
-            document.getElementById("search_cat").value = search;
+            document.getElementById("search_cat").value = category;
+
+            var parentDiv2 = document.getElementById('parentDivTag');
+            var newDiv2 = document.createElement('div');
+            newDiv2.innerHTML = '<small style="color: grey;" class=""><i class="fa fa-sort-alpha-asc"></i> '+category.toUpperCase()+'</small>';
+            parentDiv2.appendChild(newDiv2);
             
             if (search == null) {
                 search = '';
@@ -120,7 +126,7 @@
                 success: function(result){
                     $.each(result['list'],function(key,value){
                         var newDiv = document.createElement('div');
-                        newDiv.innerHTML = '<a href="detail.html?ids='+value["id"]+'" class="link_list"><h4 class="question">'+value["title"]+'</h4></a> <div class="answer">'+value["description"]+'</div> <div class="meta text-small"><i class="far fa-paper-plane"></i> created by '+value["creator"]+'</div> <hr/>';
+                        newDiv.innerHTML = '<a href="detail.html?ids='+value["id"]+'" class="link_list"><h4 class="question">'+value["title"]+'</h4></a> <div class="answer">'+value["description"]+'</div> <div class="meta text-small">created by '+value["creator"]+'</div> <hr/>';
                         newDiv.className = 'detail-wiki-'+key;
                         parentDiv.appendChild(newDiv);
                     });
