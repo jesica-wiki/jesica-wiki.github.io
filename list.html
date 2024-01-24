@@ -67,7 +67,7 @@
                 <div class="d-inline-block" style="width: 100%;margin-bottom: 3%;">
                    <form class="form-inline search-form justify-content-center" action="list.html" method="get">
                       <input type="text" name="category" class="form-control search-input" value="all" id="search_cat" style="display: none;">
-                      <input type="text" placeholder="Enter search terms..." name="search" class="form-control search-input">
+                      <input type="text" placeholder="Enter search terms..." name="search" id="searchs" class="form-control search-input">
                       <button type="submit" class="btn search-btn" value="Search"><i class="fas fa-search"></i></button>
                   </form>
                </div>
@@ -99,10 +99,12 @@
     <script src="assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
+            var inputSearch = document.getElementById('searchs');
             var ld = document.getElementById('loading-process');
             ld.style.display = "block";
             var queryParams = new URLSearchParams(window.location.search);
             var search = queryParams.get('search');
+            inputSearch.value = search;
             var category = queryParams.get('category');
             var parentDiv = document.getElementById('parentDiv');
             document.getElementById("search_cat").value = category;
