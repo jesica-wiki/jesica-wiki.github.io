@@ -157,14 +157,14 @@
 
                    $.each(result['data']['readme'],function(key,value){
                         var newDiv = document.createElement('section');
-                        newDiv.innerHTML = '<h2 class="section-title">'+value["name"]+'</h2><div class="section-block"><ul class="list list-unstyled"><pre><code class="language-markup" id="not_doc'+key+'"></code></pre></ul></div>';
+                        newDiv.innerHTML = '<h2 class="section-title">'+value["name"]+'</h2><div class="section-block"><ul class="list list-unstyled"><pre><code class="language-markup" style="min-width:100%;" id="not_doc'+key+'"></code></pre></ul></div>';
                         newDiv.className = "doc-section";
                         newDiv.id = 'note'+key;
                         parentDiv.appendChild(newDiv);
                     
                         var parentDiv1 = document.getElementById('not_doc'+key);
                         var newDiv1 = document.createElement('span');
-                        newDiv1.innerHTML = value["note"];
+                        newDiv1.innerHTML = value["note"]+"<br/><br/>";
                         parentDiv1.appendChild(newDiv1);
 
                         var newDiv2 = document.createElement('li');
