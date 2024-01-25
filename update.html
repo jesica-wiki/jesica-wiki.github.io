@@ -127,7 +127,7 @@
                window.location.href = 'index.html';
            }
            $.ajax({
-                url:"https://wiki.yogyakartadigital.com/api/v1/docs-detail/"+ids,
+                url:"https://wiki.yogyakartadigital.com/api/v1/docs-detail/"+ids+"?update=true",
                 type: "GET",
                 headers: {
                     "Authorization": "Bearer " + token
